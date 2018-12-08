@@ -1,0 +1,74 @@
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <%if(posts.length){%>
+        <%for(var i in posts){%>
+        <tr>
+            <td class="px-4">
+                <div class="row">
+                    <div class="post-title mb-1">
+                        <a target="_blank" href="<%=posts[i].link%>">
+                            <%=posts[i].title%></a>
+                    </div>
+                    <!-- <div class="post-link"><%=posts[i].link%>  </div> -->
+                    <%if(user==posts[i].uid){%>
+                        <div class="icon-edit-post" data-toggle="tooltip" title="Edit Your Post" >
+                                <i class="far fa-edit"></i>
+                        </div>
+                        <div class="icon-delete-post ml-3" data-toggle="tooltip" title="Delete Your Post">
+                                <i class="far fa-trash-alt"></i>
+                        </div>
+                        
+                          
+                        <%}%>
+                    <div class="post-desc mb-2">
+                        <%=posts[i].description.length>200?posts[i].description.substring(0,200)+".....":posts[i].description %>
+                    </div>
+
+                    <div class="post-author">
+                        <strong>Author: </strong><span class="post-tble-author-name">
+                            <%=posts[i].uname%></span>
+                    </div>
+                    <div class="post-comments ml-3">
+                        <span>
+                            <strong>Comments: </strong><span>
+                                <%=posts[i].comments.length%></span>
+
+                        </span>
+
+                    </div>
+                    
+
+                </div>
+
+
+
+                <br>
+            </td>
+        </tr>
+        <%}%>
+        <%}else{%>
+        No Results
+        <%}%>
+    </tbody>
+</table>
+<div class="post-tble-pagination"></div>
+<script>
+    var page = <%-JSON.stringify(page)%>;
+    var total = <%-JSON.stringify(total)%>;
+
+    $('.post-tble-pagination').bootpag({
+        total: Math.ceil(total / 10),
+        page: page
+    }).on("page", function (event, /* page number here */ num) {
+        get_posts(num);
+        // alert("called")
+        //    $("#content").html("Insert content"); // some ajax content loading...
+    });
+    $('.pagination li').addClass('page-item');
+    $('.pagination a').addClass('page-link');
+</script>

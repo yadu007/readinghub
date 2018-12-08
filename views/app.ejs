@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>F22 Test</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
+  <link rel="stylesheet" href="/css/app.css" type="text/css">
+
+  
+  <style>
+   
+  
+  </style>
+</head>
+
+<body>
+  <div class="modal" id="post-add-modal">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <h4 class="modal-title">Add Post</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+
+        <div class="modal-body">
+            <forms>
+              <div class="form-group">
+                  <label for="link">Link</label>
+                  <input id="post-add-link" type="text" name="link" class="form-control" id="link">
+                </div>
+               
+                <div class="form-group">
+                  <label for="title">Title</label>
+                  <input id="post-add-title" type="text" name="title" class="form-control" id="title">
+                </div>
+                <div class="form-group">
+                    <label for="desc">Description</label>
+                    <textarea rows="8" id="post-add-desc" type="text" name="desc" class="form-control" id="desc"></textarea>
+                  </div>
+            
+            </form>
+
+
+
+         
+          <button id="proj-add-button" type="button" class="btn btn-success">Create Post</button>
+          
+         <div class="modal-message mt-3"></div>
+        </div>
+
+        <div class="modal-footer">
+          <!-- <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button> -->
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <nav class="navbar navbar-expand-sm bg-dark navbar-dark justify-content-end">
+
+      <div class=" w-100 order-1 order-md-0 ">
+          <%if(user){%>
+          <button  type="button" class="btn mr-auto btn-warning" data-toggle="modal" data-target="#post-add-modal">Create Post</button>
+          <%}%>
+      </div>
+      <div class="mx-auto order-0">
+          <a class="navbar-brand mx-auto" href="#">Home Page</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+      </div>
+      <div class="navbar-collapse w-100 order-3 ">
+          <ul class="ml-auto navbar-nav text-right">
+
+
+              <i style="color:white;font-size:37px" class="far fa-user-circle"></i>
+              
+        
+                
+                  <%if(user){%>
+                    <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                  <%=user.toUpperCase()%>
+                  
+                </a>
+                <div style="left:-82px;" class="dropdown-menu">
+                  <a class="dropdown-item" href="#">Account Settings</a>
+                  <a class="dropdown-item" href="/logout">logout</a>
+        
+                </div>
+              </li>
+                <%}else{%>
+                  <li>
+                      <a class="login-text nav-link" href="/login">Login</a>
+                  </li>
+                  
+                  <%}%>
+             
+            </ul>
+      </div>
+  </nav>
+      <div class="post-table mt-2">
+
+    
+  </div>
+  <!-- <div id="page-selection">Pagination goes here</div> -->
+
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+  <script src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-bootpag/1.0.4/jquery.bootpag.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-bootpag/1.0.4/jquery.bootpag.min.js"></script>
+  <script src="/js/main.js"></script>
+  <script>
+
+
+  
+$(document).ready(function() {
+  get_posts(1)
+
+ });
+
+
+</script>
+</body>
+
+</html>

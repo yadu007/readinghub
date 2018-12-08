@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>F22 Test register</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/js/main.js"></script>
+<link rel="stylesheet" href="/css/register.css" type="text/css">
+
+
+</head>
+<body background="bgimage.jpg">
+	<div class="signup-container">
+<div class="signup-form">
+    <form action="/register_user" method="post">
+		<h2>Register</h2>
+		
+        <div class="form-group">
+			<input type="text" class="form-control" name="name" placeholder="Name" required="required">       	
+        </div>
+        <div class="form-group">
+        	<input type="email" class="form-control" name="email" placeholder="Email" required="required">
+        </div>
+		<div class="form-group">
+            <input type="password" class="form-control" name="password" placeholder="Password" required="required">
+        </div>
+		       
+
+		<div class="form-group">
+            <button type="submit" class="btn btn-success btn-lg btn-block">Register Now</button>
+        </div>
+    </form>
+	<div class="text-center">Already have an account? <a href="/login">Sign in</a></div>
+</div>
+</div>
+</body>
+</html>                            

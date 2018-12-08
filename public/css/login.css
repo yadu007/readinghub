@@ -1,0 +1,31 @@
+body {
+  color: #fff;
+  background: #63738a;
+  background-image: url("https://www.pixelstalk.net/wp-content/uploads/images1/Nature-dark-woods-images.jpg"); }
+
+.login-form {
+  width: 340px;
+  margin: 15% auto; }
+
+.login-form form {
+  border-radius: 10px;
+  margin-bottom: 15px;
+  background: #f7f7f7;
+  padding: 30px; }
+
+.login-form h2 {
+  margin: 0 0 15px; }
+
+.form-control, .btn {
+  min-height: 38px;
+  border-radius: 2px; }
+
+.form-control, a {
+  color: white; }
+
+.form-control {
+  color: black; }
+
+.btn {
+  font-size: 15px;
+  font-weight: bold; }
