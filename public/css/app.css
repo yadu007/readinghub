@@ -19,6 +19,8 @@
   .post-table .post-tble-author-name {
     color: #883333;
     text-decoration: underline; }
+  .post-table .post-desc {
+    font-size: 15px; }
   .post-table .pagination ul {
     display: flex;
     list-style: none; }

@@ -1,4 +1,4 @@
-let api_lib = require('../lib/api');
+let app_api = require('../lib/app');
 var ejs = require('ejs');
 
 //login function : login user and respond with access token.
@@ -19,100 +19,10 @@ else{
 let register =  (req,res)=>{
     res.render("register")
 }
-//reset function :  reseting password if user signedin
-let reset = async function(req,res){
-    let key = req.get('x-api-key')
-    if(key){
-    api_lib.login_check(req.body.email,key,(resp)=>{
-        if(resp){
-            if(!req.body.new_pass){
-                res.status(200).json({
-                    msg: "new password required"
-                });
-                res.end();
-            }
-            else{
-                api_lib.reset(req.body.email,req.body.new_pass,()=>{
-                    res.status(200).json({
-                        msg: "password updated"
-                    });
-                    res.end();
-                });
 
 
 
-            }
-;
-        }
-        else{
-            res.status(200).json({
-                msg: "Please login to reset the password"
-            });
-        }
 
-       })
-
-
-    }
-
-}
-//forgot password function: user will request for rest via POST and verifying identity via GET 
-let forgot = function(req,res){
-    if (req.method == "POST") {
-
-        api_lib.create_token_forgot(req.body.email,req.body.new_pass,(forgot_ink)=>{
-            if(forgot_ink){
-                res.status(200).json({
-                    forgot_link: forgot_ink
-                });
-            }
-        })
-    }
-    else if(req.method == "GET"){
-        api_lib.verify_forgot(req.query.token,(val)=>{
-            if(val){
-                res.status(200).json({
-                    response: "done reseting"
-                });
-            }
-            else{
-                res.status(200).json({
-                    response: "error in reset"
-                });
-
-            }
-        })
-
-    }
-}
-//middleware to check if the user logged in
-let login_check = async (req,res,next)=>{
-    let key = req.get('x-api-key')
-    if(key){
-    api_lib.login_check(req.body.email,key,function(resp){
-        if(resp){
-
-        res.status(200).json({
-         msg: "already logged in."
-     });
-     res.end();
-        }
-        else{
-            next()
-        }
-
-       })
-
-
-    }
-    else{
-        next()
-    }
-
-}
-let checker = (req,res)=>{
-    res.redirect("/yoyo")
-}
 let logout = (req,res)=>{
     if(req.user){
         req.logout();
@@ -133,7 +43,7 @@ let app = (req,res)=>{
     }
 }
 let register_user = async (req,res)=>{
-        let result = await api_lib.register_user(req.body)
+        let result = await app_api.register_user(req.body)
         res.render('login',{message:result.message})
 
   
@@ -148,7 +58,7 @@ let create_post = async (req,res)=>{
     let user_name = req.user.name;
     let data = {uid:user_id,uname:user_name,link:link,title:title,description:desc}
     
-    let es_res = await api_lib.create_post(data);
+    let es_res = await app_api.create_post(data);
     if(es_res.result=='created'){
         res.writeHead(200, {
             'content-type': 'application/json'
@@ -178,11 +88,12 @@ let create_post = async (req,res)=>{
 
 let get_posts = async (req,res)=>{
     let page = req.query.page || 1
-    let result = await api_lib.get_posts(page);
+    let result = await app_api.get_posts(page);
 
     if(result.hits.total){
         let posts = result.hits.hits.map(function(e){
-            return e._source
+         e._source["post_id"] = e._id;
+         return e._source;
         })
         if(req.user){
             ejs.renderFile('views/post_result.ejs', {posts:posts,total:result.hits.total,page:page,user:req.user.id}, function(err, doc) {
@@ -221,6 +132,71 @@ let get_posts = async (req,res)=>{
     
 }
 
+let delete_post = async (req,res)=>{
+    if(req.user){
+        let id = req.query.id;
+        let status = await app_api.delete_post(id);
+        res.writeHead(200, {
+            'content-type': 'application/json'
+        });
+        res.write(JSON.stringify({
+            status: 'ok',
+            content: status
+        }));
+        res.end('\n');
+
+    }
+ 
+}
+let get_single_post = async (req,res)=>{
+    if(req.user){
+        let id = req.query.id;
+        let status = await app_api.get_single_post(id);
+        if(status.hits.hits.length){
+            res.writeHead(200, {
+                'content-type': 'application/json'
+            });
+            res.write(JSON.stringify({
+                status: 'ok',
+                content: status.hits.hits[0]._source
+            }));
+            res.end('\n');
+            
+        }
+        else{
+            res.writeHead(200, {
+                'content-type': 'application/json'
+            });
+            res.write(JSON.stringify({
+                status: 'ok',
+                content: "None"
+            }));
+            res.end('\n');
+            
+        }
+         
+    }
+}
+let update_post = async (req,res)=>{
+    if(req.user){        
+        let id = req.query.id;
+        let title = req.query.title;
+        let link = req.query.link;
+        let description = req.query.desc;
+        let status = await app_api.update_post({id:id,title:title,link:link,description:description});
+        if(status.result=="updated"){
+            res.writeHead(200, {
+                'content-type': 'application/json'
+            });
+            res.write(JSON.stringify({
+                status: 'ok',
+                content: "updated"
+            }));
+            res.end('\n');
+        }
+    }
+}
+
 module.exports = {
-    login,register,checker,logout,app,register_user,create_post,get_posts
+    login,register,logout,app,register_user,create_post,get_posts,delete_post,get_single_post,update_post
 }
