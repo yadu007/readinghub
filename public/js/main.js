@@ -65,14 +65,14 @@ $(document).on("click",".icon-edit-post", function () {
         $("#post-del-title").val(data.title);
         $("#post-del-desc").val(data.description);
         $("#post-del-link").val(data.link);
-        $(".proj-create-button").attr("id",id);
+        $(".proj-edit-button").attr("id",id);
         $("#post-edit-modal").modal("show")
 
 
 
     })
 })
-$(document).on("click",".proj-create-button",function(){
+$(document).on("click",".proj-edit-button",function(){
         let id = this.id; 
         let title = $("#post-del-title").val();
         let desc = $("#post-del-desc").val();
@@ -84,7 +84,7 @@ $(document).on("click",".proj-create-button",function(){
         link:link
     }, function (data) {
 if(data.content=="updated"){
-                $(".modal-del-message").html('<div class="alert alert-success alert-dismissible">\
+                $(".modal-edit-message").html('<div class="alert alert-success alert-dismissible">\
             <button type="button" class="close" data-dismiss="alert">&times;</button>\
             <strong>Whooa:</strong> Post Updated Successfully\
           </div>')
