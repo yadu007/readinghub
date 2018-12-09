@@ -149,7 +149,7 @@ let delete_post = async (req,res)=>{
  
 }
 let get_single_post = async (req,res)=>{
-    if(req.user){
+    // if(req.user){
         let id = req.query.id;
         let status = await app_api.get_single_post(id);
         if(status.hits.hits.length){
@@ -175,7 +175,7 @@ let get_single_post = async (req,res)=>{
             
         }
          
-    }
+    // }
 }
 let update_post = async (req,res)=>{
     if(req.user){        
@@ -212,7 +212,7 @@ let create_comment = async (req,res)=>{
             });
             res.write(JSON.stringify({
                 status: 'ok',
-                content: "comments added"
+                content: "comment added"
             }));
             res.end('\n');
         }
@@ -220,6 +220,16 @@ let create_comment = async (req,res)=>{
                 
         // res.end('\n');
 
+    }
+    else{
+        res.writeHead(200, {
+            'content-type': 'application/json'
+        });
+        res.write(JSON.stringify({
+            status: 'ok',
+            content: "login"
+        }));
+        res.end('\n');
     }
 }
 

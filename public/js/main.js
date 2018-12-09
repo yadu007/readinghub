@@ -120,13 +120,22 @@ $(document).on('click','.btn-add-comment',function(){
         post_id: id,
         comment : comment
     }, function (data) {
-        console.log(data);
+        if(data.content=="comment added"){
+            $(".modal-show-message").html('<div class="alert alert-success alert-dismissible">\
+            <button type="button" class="close" data-dismiss="alert">&times;</button>\
+            <strong>Whooa:</strong> Comments Added Successfully\
+          </div>')
+          setTimeout(function(){ showcomments(id); }, 1000);
+        }
+        else{
+            $(".modal-show-message").html('<div class="alert alert-danger alert-dismissible">\
+            <button type="button" class="close" data-dismiss="alert">&times;</button>\
+            <strong></strong> Login to add comments\
+          </div>')
+        }
+        // console.log(data);
         
-        $(".modal-show-message").html('<div class="alert alert-success alert-dismissible">\
-        <button type="button" class="close" data-dismiss="alert">&times;</button>\
-        <strong>Whooa:</strong> Comments Added Successfully\
-      </div>')
-      setTimeout(function(){ showcomments(id); }, 1000);
+        
       
         
     //   console.log(data);
