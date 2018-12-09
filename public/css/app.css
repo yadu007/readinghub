@@ -29,6 +29,12 @@
   .post-table .icon-edit-post, .post-table .icon-delete-post {
     margin-left: auto;
     cursor: pointer; }
+  .post-table .btn-show-post {
+    height: 24px;
+    color: #000;
+    background-color: #ffffff;
+    border-color: #b1b1b1;
+    line-height: 2px; }
 
 #post-add-modal label {
   font-weight: bold; }
