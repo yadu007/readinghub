@@ -27,9 +27,7 @@ function loadSessionHandlers() {
         } catch (err) {
             done(err, null);
         }
-    });
-
-  
+    });  
 }
 
 function loadStrategies() {
@@ -71,9 +69,7 @@ let requireAuthorization = function(req, res, next) {
     var user = req.user;
     if (!user) {
         res.redirect('/login');
-    } else if (!user.dataValues.is_admin) {
-        res.redirect('/app');
-    } else {
+    }  else {
         next();
     }
 };

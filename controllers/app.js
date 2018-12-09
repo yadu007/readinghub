@@ -196,7 +196,33 @@ let update_post = async (req,res)=>{
         }
     }
 }
+let create_comment = async (req,res)=>{
+    if(req.user){
+        let user = req.user.name;
+        let comm = req.query.comment;
+        let comment = {user:user,text:comm};
+        let post_id = req.query.post_id;
+        let existing_comment = await app_api.get_single_post(post_id);
+        let ex_com = existing_comment.hits.hits[0]._source.comments;
+        ex_com.push(comment)
+        let updated_st = await app_api.create_comment(post_id,ex_com);
+        if(updated_st.result=="updated"){
+            res.writeHead(200, {
+                'content-type': 'application/json'
+            });
+            res.write(JSON.stringify({
+                status: 'ok',
+                content: "comments added"
+            }));
+            res.end('\n');
+        }
+
+                
+        // res.end('\n');
+
+    }
+}
 
 module.exports = {
-    login,register,logout,app,register_user,create_post,get_posts,delete_post,get_single_post,update_post
+    login,register,logout,app,register_user,create_post,get_posts,delete_post,get_single_post,update_post,create_comment
 }

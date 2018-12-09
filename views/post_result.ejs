@@ -20,7 +20,6 @@
                         <i class="far fa-edit"></i>
                     </div>
 
-
                     <%}%>
                     <div class="post-title mb-1">
                         <a target="_blank" href="<%=posts[i].link%>">
@@ -44,6 +43,12 @@
                         </span>
 
                     </div>
+                    <div class="post-show-bt ml-3 float-left">
+                            <button id="<%=posts[i].post_id%>" type="button" class="btn btn-dark btn-sm btn-show-post">Show post</button>
+    
+                        </div>
+                   
+
 
 
 
@@ -63,6 +68,13 @@
 </table>
 <div class="post-tble-pagination"></div>
 <script>
+    //   $.getJSON('/create_comment', {
+    //     post_id: "aWbGjmcBFfcFyuLNV3EN",
+    //     comment : "hai comment"
+    // }, function (data) {
+    // //   console.log(data);
+      
+    // })
  
     var page = <%-JSON.stringify(page)%>;
     var total = <%-JSON.stringify(total)%>;

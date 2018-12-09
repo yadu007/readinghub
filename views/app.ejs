@@ -101,6 +101,56 @@
       </div>
     </div>
 
+    <div class="modal" id="post-show-modal">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+          <div class="modal-content">
+    
+            <div class="modal-header">
+              <h4 class="modal-title">Post</h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+    
+            <div class="modal-body">
+                <forms>
+                  <div class="form-group">
+                      <label for="link">Link</label>
+                      <input readonly id="post-show-link" type="text" name="link" class="form-control" id="link">
+                    </div>
+                   
+                    <div class="form-group">
+                      <label for="title">Title</label>
+                      <input readonly id="post-show-title" type="text" name="title" class="form-control" id="title">
+                    </div>
+                    <div class="form-group">
+                        <label for="desc">Description</label>
+                        <textarea readonly rows="5" id="post-show-desc" type="text" name="desc" class="form-control" id="desc"></textarea>
+                      </div>
+                
+                </form>
+    
+    
+              
+           
+              <div class="form-group">
+                  <label for="add-c">Add comments</label>
+                  <textarea rows="8" id="post-add-comment" type="text" name="add-c" class="form-control" id="add-c"></textarea>
+                </div>
+                <button   type="button" class="btn btn-success btn-add-comment mb-2">Add Comment</button>
+                <div class="modal-show-message mt-3"></div>
+                <div><h4>Comments</h4></div>
+                <div class="list-group pos-comments-list">
+                 
+                </div>
+            </div>
+    
+            <div class="modal-footer">
+              <!-- <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button> -->
+            </div>
+    
+          </div>
+        </div>
+      </div>
+
   <nav class="navbar navbar-expand-sm bg-dark navbar-dark justify-content-end">
 
       <div class=" w-100 order-1 order-md-0 ">
@@ -161,7 +211,7 @@
   <script src="/js/main.js"></script>
   <script>
 
-
+  
   
 $(document).ready(function() {
   get_posts(1)
