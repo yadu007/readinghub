@@ -2,6 +2,8 @@ body {
   color: #fff;
   background: #63738a;
   background-image: url("https://www.pixelstalk.net/wp-content/uploads/images1/Nature-dark-woods-images.jpg"); }
+  body h2 {
+    color: black; }
 
 .login-form {
   width: 340px;
